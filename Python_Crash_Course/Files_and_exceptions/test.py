@@ -6,7 +6,7 @@ while True:
     if first_num == "q":
         break
 
-    sec_num = input("enter the second number")
+    sec_num = input("enter the second number : ")
     if sec_num == "q":
         break
 
