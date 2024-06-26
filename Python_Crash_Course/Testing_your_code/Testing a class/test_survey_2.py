@@ -15,7 +15,6 @@ class TestAnonumousSurvey(unittest.TestCase):
         self.responses = ['english', 'malayalam', 'hindi']
 
         
-
     def test_store_single_response(self):
         """Test that a single response is stored properly."""
 
@@ -35,6 +34,3 @@ class TestAnonumousSurvey(unittest.TestCase):
 if __name__ == "__main__":
     unittest.main()
 
-
-# there is some repetiion going on this test code
-# to avoid this refer test_survey_2.py

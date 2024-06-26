@@ -28,3 +28,6 @@ class TestAnonumousSurvey(unittest.TestCase):
 if __name__ == "__main__":
     unittest.main()
 
+
+# there is some repetiion going on this test code
+# to avoid this refer test_survey_2.py
