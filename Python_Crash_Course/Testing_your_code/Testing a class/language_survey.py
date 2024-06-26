@@ -14,5 +14,5 @@ while True:
     my_survey.store_response(response)
 
 #show result of the survey
-print("\n Thank you everyone for participating in the survey")
+print("\n Thank you everyone for participating in the survey!")
 my_survey.show_results()
