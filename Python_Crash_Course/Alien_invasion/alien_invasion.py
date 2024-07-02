@@ -42,21 +42,33 @@ class AlienInvasion:
             # watch for keyboard and mouse events.
             # To make our program respond to events, we write this event loop to listen for
             # events and perform appropriate tasks depending on the kinds of events that occur
-
-            # To access the events that Pygame detects, we’ll use the pygame.event.get() function
-            # This function returns a list of events that have taken place since the last time this function was called.
-            for event in pygame.event.get():
-                # Any keyboard or mouse event will cause this for loop to run
-                if event.type == pygame.QUIT:
-                    sys.exit()
-
+            self._check_events()
+            
             # Redraw the screen during each pass through the loop.
-            self.screen.fill(self.settings.bg_color)
-            self.ship.blitme()
+            self._update_screen()
+            
+        
+    
+    def _check_events(self):
+        """respond to keypressess and mouse events"""
+        # To access the events that Pygame detects, we’ll use the pygame.event.get() function
+        # This function returns a list of events that have taken place since the last time this function was called.
+        for event in pygame.event.get():
+            # Any keyboard or mouse event will cause this for loop to run
+            if event.type == pygame.QUIT:
+                sys.exit()
 
 
-            # make the last drawn screen visible
-            pygame.display.flip()
+
+    def _update_screen(self):
+        """update images on the screen and flip to the new screen"""
+        
+        self.screen.fill(self.settings.bg_color)
+        self.ship.blitme()
+
+        # make the last drawn screen visible
+        pygame.display.flip()
+
 
 
 if __name__ == "__main__":
