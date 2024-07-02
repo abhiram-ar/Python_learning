@@ -35,3 +35,7 @@ learning :
 
     A helper method does work inside a class but isn’t meant to be called through an instance. 
     In Python, a single leading underscore indicates a helper method
+
+
+    Write the code that works and then as the code grows more complex refactor/restructure them,
+    this is most of the developmenet process 
