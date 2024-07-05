@@ -58,6 +58,7 @@ class AlienInvasion:
             if event.type == pygame.QUIT:
                 sys.exit()
 
+            #Each keypress is registered as a KEYDOWN event. 
 
 
     def _update_screen(self):
