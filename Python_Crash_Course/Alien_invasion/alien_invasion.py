@@ -54,7 +54,7 @@ class AlienInvasion:
         # To access the events that Pygame detects, we’ll use the pygame.event.get() function
         # This function returns a list of events that have taken place since the last time this function was called.
         for event in pygame.event.get():
-            # Any keyboard or mouse event will cause this for loop to run
+            # Any keyboard or mouse event will cause this for loop to run.
             if event.type == pygame.QUIT:
                 sys.exit()
 
@@ -73,3 +73,4 @@ class AlienInvasion:
 if __name__ == "__main__":
     ai = AlienInvasion()
     ai.run_game()
+
