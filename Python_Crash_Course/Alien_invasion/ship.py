@@ -1,3 +1,4 @@
+from math import fabs
 import pygame
 
 class Ship:
@@ -23,13 +24,22 @@ class Ship:
         #start each new ship at the bottom center of the screen.
         self.rect.midbottom = self.screen_rect.midbottom
 
+
         # movement flag
         self.moving_right = False
+        self.moving_left = False
+
 
     def update(self):
         """update the ship's position based on the movement flag"""
         if self.moving_right:
             self.rect.x += 1
+        
+        # not using elif for a special case! what is both keys are pressed
+        # when both keys are pressed the ship will stop moving
+        # this condition may occur when the player is switching the direction
+        if self.moving_left:
+            self.rect.x -=1 
 
     def blitme(self):
         """draw the ship at is current location"""
