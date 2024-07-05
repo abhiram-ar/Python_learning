@@ -43,6 +43,9 @@ class AlienInvasion:
             # To make our program respond to events, we write this event loop to listen for
             # events and perform appropriate tasks depending on the kinds of events that occur
             self._check_events()
+
+            # update the ship position if needed
+            self.ship.update()
             
             # Redraw the screen during each pass through the loop.
             self._update_screen()
@@ -59,6 +62,17 @@ class AlienInvasion:
                 sys.exit()
 
             #Each keypress is registered as a KEYDOWN event. 
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RIGHT:
+                    # move the ship to right
+                    # untill the key is pressed 
+                    self.ship.moving_right = True
+            elif event.type == pygame.KEYUP:
+                if event.key == pygame.K_RIGHT:
+                    self.ship.moving_right = False
+
+            
+
 
 
     def _update_screen(self):
