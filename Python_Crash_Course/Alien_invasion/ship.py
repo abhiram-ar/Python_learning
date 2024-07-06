@@ -42,18 +42,20 @@ class Ship:
 
     def update(self):
         """update the ship's position based on the movement flag"""
-        if self.moving_right:
+                                            #handle overflow 
+        if self.moving_right and (self.rect.right < self.screen_rect.right):
             self.x += self.settings.ship_speed
         
         # not using elif for a special case! what is both keys are pressed
         # when both keys are pressed the ship will stop moving
         # this condition may occur when the player is switching the direction
-        if self.moving_left:
+        if self.moving_left and (self.rect.left > 0):
             self.x -= self.settings.ship_speed
 
         #update the rect object from self.x
         # only integer part of x is taken here
-        self.rect.x = self.x
+        # this is used to display the ships new position
+        self.rect.x = int(self.x)
 
 
     def blitme(self):

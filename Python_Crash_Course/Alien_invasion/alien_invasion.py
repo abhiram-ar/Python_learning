@@ -17,6 +17,7 @@ class AlienInvasion:
 
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width, self.settings.screen_height))
+        
         # stored in object so it can be used in other class methods
         # The object we assigned to self.screen is called a surface. A surface in
         # Pygame is a part of the screen where a game element can be displayed.
@@ -24,6 +25,12 @@ class AlienInvasion:
         # surface returned by display.set_mode() represents the entire game window.
         # When we activate the game’s animation loop, this surface will be redrawn
         # on every pass through the loop, so it can be updated with any changes triggered by user input.
+
+        
+        # -- code for full screen
+        #self.screen = pygame.display.set_mode((0,0), pygame.FULLSCREEN)
+        #self.settings.screen_width = self.screen.get_rect().width
+        #self.settings.screen_height = self.screen.get_rect().height
 
         pygame.display.set_caption("Alien Invasion")
 
@@ -63,23 +70,39 @@ class AlienInvasion:
 
             #Each keypress is registered as a KEYDOWN event. 
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT:
-                    # move the ship to right
-                    # untill the key is pressed 
-                    self.ship.moving_right = True
-
-                elif event.key == pygame.K_LEFT:
-                    self.ship.moving_left = True
-
+                self._check_keydown_events(event)
 
             elif event.type == pygame.KEYUP:
-                if event.key == pygame.K_RIGHT:
-                    self.ship.moving_right = False
-                    
-                elif event.key == pygame.K_LEFT:
-                    self.ship.moving_left = False
+                self._check_keyup_events(event)
+
 
             
+
+
+
+    def _check_keydown_events(self, event):
+        """respond to keypress"""
+        if event.key == pygame.K_RIGHT:
+            # move the ship to right
+            # untill the key is unpressed 
+            self.ship.moving_right = True
+
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = True
+        
+        elif event.key == pygame.K_q:
+                sys.exit()
+
+
+
+    def _check_keyup_events(self, event):  
+        """respond to release"""  
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = False
+            
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = False
+        
 
 
 
