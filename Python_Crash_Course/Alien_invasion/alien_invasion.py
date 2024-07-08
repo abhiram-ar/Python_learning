@@ -2,6 +2,7 @@ import sys  # to exit the game when the player quits
 import pygame
 from settings import Settings
 from ship import Ship
+from bullet import Bullet
 
 
 class AlienInvasion:
@@ -39,8 +40,11 @@ class AlienInvasion:
         # the Ship() requires on argument, which is an instance of AlienInvasion
         # The self argument here refers to the current instance of AlienInvasion
         # this parameter gives Ship acces to the game's resources
+        
 
-
+        self.bullets = pygame.sprite.Group()
+        # store all the live bullets in a group
+        # so we can manage the bullets that have already been fired.
 
     def run_game(self):
         """start the main loop for the game."""
@@ -77,9 +81,6 @@ class AlienInvasion:
 
 
             
-
-
-
     def _check_keydown_events(self, event):
         """respond to keypress"""
         if event.key == pygame.K_RIGHT:
@@ -93,6 +94,9 @@ class AlienInvasion:
         elif event.key == pygame.K_q:
                 sys.exit()
 
+        elif event.key == pygame.K_SPACE:
+            self._fire_bullet()
+
 
 
     def _check_keyup_events(self, event):  
@@ -102,7 +106,13 @@ class AlienInvasion:
             
         elif event.key == pygame.K_LEFT:
             self.ship.moving_left = False
-        
+
+
+
+    def _fire_bullet(self):
+        """create a new bullet and add it to the bullets group"""
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)
 
 
 
@@ -111,6 +121,13 @@ class AlienInvasion:
         
         self.screen.fill(self.settings.bg_color)
         self.ship.blitme()
+
+        for bullet in self.bullets.sprites():
+            bullet.draw_bullet()
+
+        # When you call update() on a bullet group, 
+        # the group automatically calls update() for each sprite in the group.
+        self.bullets.update()
 
         # make the last drawn screen visible
         pygame.display.flip()
