@@ -40,4 +40,4 @@ learning :
     Write the code that works and then as the code grows more complex refactor/restructure them,
     this is most of the developmenet process
 
-    Event.key() can only be called after having a event.type() else we will get an error 
+    Event.key() can only be called after having a event.type() else we will get an error.
