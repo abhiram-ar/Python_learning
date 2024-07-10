@@ -1,4 +1,3 @@
-from math import fabs
 import pygame
 
 class Ship:
