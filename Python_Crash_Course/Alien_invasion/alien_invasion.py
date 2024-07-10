@@ -58,6 +58,9 @@ class AlienInvasion:
             # update the ship position if needed
             self.ship.update()
             
+            #update the bullets location and manage out of screen bullets
+            self._update_bullet()
+            
             # Redraw the screen during each pass through the loop.
             self._update_screen()
             
@@ -111,9 +114,27 @@ class AlienInvasion:
 
     def _fire_bullet(self):
         """create a new bullet and add it to the bullets group"""
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+        # limiting the no. of bullets a player can fire
+        if len(self.bullets) <= self.settings.bullets_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
 
+
+    
+    def _update_bullet(self):
+        """update bullets and get rid of old bullets."""
+        # When you call update() on a bullet group, 
+        # the group automatically calls update() for each sprite in the group.
+        self.bullets.update()
+
+        # get rid of bullets that have dsappeared ie, out of window
+        # this make sure we only use required memory as the bullets out of view continues to move
+            # here we are modifying(deleteing) the contents of loop while it is running,
+            # so we pass a copy of the bullet list
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+        print(len(self.bullets))
 
 
     def _update_screen(self):
@@ -124,10 +145,6 @@ class AlienInvasion:
 
         for bullet in self.bullets.sprites():
             bullet.draw_bullet()
-
-        # When you call update() on a bullet group, 
-        # the group automatically calls update() for each sprite in the group.
-        self.bullets.update()
 
         # make the last drawn screen visible
         pygame.display.flip()
