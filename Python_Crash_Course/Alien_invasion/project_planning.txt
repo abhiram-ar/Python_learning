@@ -42,3 +42,12 @@ learning :
 
     Event.key() can only be called after having a event.type() else we will get an error.
 
+
+
+
+
+    adding aliens:
+
+    When you’re beginning a new phase of development on a large project, it’s 
+    always a good idea to revisit your plan and clarify what you want to 
+    accomplish with the code you’re about to write.
