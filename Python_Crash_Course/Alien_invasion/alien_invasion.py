@@ -146,9 +146,22 @@ class AlienInvasion:
     def _create_fleet(self):
         """create a fleet of aliens."""
 
-        #make an alien and add it to the group
-        alien = Alien(self)
-        self.aliens.add(alien)
+        # create an alien and find the number of aliens in a row.
+        alien = Alien(self) # just for width purpose ig
+        alien_width = alien.rect.width
+        available_space_x = self.settings.screen_width - (2* alien_width) #cutting of some margin
+        number_aliens_x = available_space_x // (2 * alien_width)  # taking margin of alien in to consideration
+
+
+        #create the first row of aliens
+        for alien_number in range(number_aliens_x):
+            # create an alien and place it in the row.
+            alien = Alien(self)
+            alien.x = alien_width + 2 * alien_width * alien_number
+            alien.rect.x = alien.x
+
+            # add it to the group
+            self.aliens.add(alien)
 
 
 
