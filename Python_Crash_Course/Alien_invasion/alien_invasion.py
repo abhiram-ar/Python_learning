@@ -68,14 +68,16 @@ class AlienInvasion:
             # events and perform appropriate tasks depending on the kinds of events that occur
             self._check_events()
 
-            # update the ship position if needed
-            self.ship.update()
-            
-            #update the bullets location and manage out of screen bullets
-            self._update_bullet()
+            # elemetst to only when player is playing
+            if self.stats.game_active:
+                # update the ship position if needed
+                self.ship.update()
+                
+                #update the bullets location and manage out of screen bullets
+                self._update_bullet()
 
-            #move the alien ship
-            self._update_aliens()
+                #move the alien ship
+                self._update_aliens()
             
             # Redraw the screen during each pass through the loop.
             self._update_screen()
