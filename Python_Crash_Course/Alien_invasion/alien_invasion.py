@@ -1,3 +1,4 @@
+from random import randint
 import sys  # to exit the game when the player quits
 from time import sleep
 
