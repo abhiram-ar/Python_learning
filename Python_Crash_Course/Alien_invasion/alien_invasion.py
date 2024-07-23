@@ -125,6 +125,10 @@ class AlienInvasion:
 
         elif event.key == pygame.K_SPACE:
             self._fire_bullet()
+        
+        #special entry : start the game when user press "p"
+        elif event.key == pygame.K_p:
+            self._start_game()
 
 
     def _check_keyup_events(self, event):  
@@ -140,21 +144,24 @@ class AlienInvasion:
         """starts the game when the player clicks play."""
         button_clicked = self.play_button.rect.collidepoint(mouse_pos) # check weather mouse point overlap region defined by play buttons rect
         if button_clicked and not self.stats.game_active: # a bug fix to dont restat the gmae if we again click the area where the play button was
+            self._start_game()
+            
 
-            self.stats.reset_stats()
-            self.stats.game_active = True
 
-            # get rid of any remaining aliens and bullets
-            self.aliens.empty()
-            self.bullets.empty()
+    def _start_game(self):
+        self.stats.reset_stats()
+        self.stats.game_active = True
 
-            #create a fleet and center the ship
-            self._create_fleet()
-            self.ship.center_ship()
+        # get rid of any remaining aliens and bullets
+        self.aliens.empty()
+        self.bullets.empty()
 
-            # hide the mouse cursor
-            pygame.mouse.set_visible(False)
+        #create a fleet and center the ship
+        self._create_fleet()
+        self.ship.center_ship()
 
+        # hide the mouse cursor
+        pygame.mouse.set_visible(False)
 
 
 
