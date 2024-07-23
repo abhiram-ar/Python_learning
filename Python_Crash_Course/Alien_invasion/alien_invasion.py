@@ -138,7 +138,9 @@ class AlienInvasion:
 
     def _check_play_button(self, mouse_pos):
         """starts the game when the player clicks play."""
-        if self.play_button.rect.collidepoint(mouse_pos): # check weather mouse point overlap region defined by play buttons rect
+        button_clicked = self.play_button.rect.collidepoint(mouse_pos) # check weather mouse point overlap region defined by play buttons rect
+        if button_clicked and not self.stats.game_active: # a bug fix to dont restat the gmae if we again click the area where the play button was
+
             self.stats.reset_stats()
             self.stats.game_active = True
 
@@ -149,6 +151,9 @@ class AlienInvasion:
             #create a fleet and center the ship
             self._create_fleet()
             self.ship.center_ship()
+
+
+
 
     def _fire_bullet(self):
         """create a new bullet and add it to the bullets group"""
