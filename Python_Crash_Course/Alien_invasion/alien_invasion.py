@@ -144,6 +144,9 @@ class AlienInvasion:
         """starts the game when the player clicks play."""
         button_clicked = self.play_button.rect.collidepoint(mouse_pos) # check weather mouse point overlap region defined by play buttons rect
         if button_clicked and not self.stats.game_active: # a bug fix to dont restat the gmae if we again click the area where the play button was
+            #reset the game settings
+            self.settings.initialize_dynamic_settings()
+
             self._start_game()
             
 
@@ -210,6 +213,7 @@ class AlienInvasion:
             # Distroy existing bullets and create new fleet.
             self.bullets.empty()
             self._create_fleet()
+            self.settings._increase_speed()
     
 
 
