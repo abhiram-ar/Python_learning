@@ -20,7 +20,7 @@ class Ship:
 
 
         #load the ship image and get its rect.
-        self.image = pygame.image.load(r"Python_Crash_Course\Alien_invasion\images\ship.bmp")  #retunrs a surace representing the ship
+        self.image = pygame.image.load(r"images\ship.bmp")  #retunrs a surace representing the ship
         self.rect = self.image.get_rect()
 
         #start each new ship at the bottom center of the screen.

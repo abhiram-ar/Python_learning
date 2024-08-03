@@ -8,7 +8,9 @@ from ship import Ship
 from bullet import Bullet
 from alien import Alien
 from game_stats import GameStats
+from scoreboard import Scoreboard
 from button import Button
+
 
 class AlienInvasion:
     """overall class to manage the game assests and behavior."""
@@ -41,8 +43,12 @@ class AlienInvasion:
         pygame.display.set_caption("Alien Invasion")
 
 
+
+
         # create an instance to store game statistics
+        # and create a scoreboard
         self.stats = GameStats(self)
+        self.sb = Scoreboard(self)
 
 
         self.ship = Ship(self)
@@ -148,6 +154,9 @@ class AlienInvasion:
             self.settings.initialize_dynamic_settings()
 
             self._start_game()
+
+            #resett the score to 0
+            self.sb.prep_score()
             
 
 
@@ -202,10 +211,17 @@ class AlienInvasion:
     def _check_bullet_alien_collision(self):
         """respond to bullet alien collision."""
 
-        collision = pygame.sprite.groupcollide(self.bullets, self. aliens, True, True)
+        collisions = pygame.sprite.groupcollide(self.bullets, self. aliens, True, True)
             #it compares each bullet’s rect with each alien’s rect and returns a dictionary 
             #containing the bullets and aliens that have collided  
             # True True argument tell the pygame to delete the items that have collided
+
+
+        if collisions:
+            for aliens in collisions.values(): # a bullet can hit multiple aliens, the dictory contains the list of aliens that a single bullet had hit
+                self.stats.score += self.settings.alien_points * (len(aliens))
+            self.sb.prep_score()
+            self.sb.check_high_score()
 
         
         # repopulatig the fleet if all aliens are dead
@@ -214,6 +230,10 @@ class AlienInvasion:
             self.bullets.empty()
             self._create_fleet()
             self.settings._increase_speed()
+
+            # increase level
+            self.stats.level += 1
+            self.sb.prep_level()
     
 
 
@@ -332,6 +352,10 @@ class AlienInvasion:
         self.aliens.draw(self.screen)
         # draw(): draws each element in the group at the position defined by its rect attribute. 
         # attribute: a surface on which to draw the elements from the group.
+
+
+        #draw the socre information
+        self.sb.show_score()
 
 
          # Draw the play button if the game is inactive.
