@@ -1,6 +1,7 @@
 import pygame
+from pygame.sprite import Sprite
 
-class Ship:
+class Ship(Sprite):
     """a class to manage the ship"""
 
     def __init__(self, ai_game):
@@ -8,6 +9,9 @@ class Ship:
 
             arg : ai_game , this give class ship the access to all game resources defined in ai
         """
+
+        super().__init__()
+
 
         # pygame treats all game elements like reactangles("rects")
         # this treatment is efficient to compute collison
